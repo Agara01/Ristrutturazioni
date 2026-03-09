@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calavetta Ristrutturazioni</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #c9a14a;
+      --dark:    #1a1a1a;
+      --mid:     #2d2d2d;
+      --light:   #f5f0eb;
+      --white:   #ffffff;
+      --radius:  12px;
+      --shadow:  0 8px 32px rgba(0,0,0,.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(26,26,26,.92);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+    }
+
+    .logo {
+      font-size: 1.4rem; font-weight: 800; color: var(--gold);
+      letter-spacing: .5px; text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: #ccc; text-decoration: none; font-size: .95rem;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold); color: var(--dark) !important;
+      padding: .45rem 1.2rem; border-radius: 6px; font-weight: 700 !important;
+    }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 26px; height: 2px; background: var(--gold); border-radius: 2px; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0e0e0e 0%, #2a1f0e 60%, #1a1a1a 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 100px 5% 60px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80') center/cover;
+      opacity: .12;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 760px; }
+
+    .badge {
+      display: inline-block; background: var(--gold); color: var(--dark);
+      font-size: .8rem; font-weight: 700; letter-spacing: 2px;
+      padding: .35rem 1rem; border-radius: 50px; margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      color: var(--white); font-weight: 900; line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span { color: var(--gold); }
+
+    .hero p {
+      font-size: 1.15rem; color: #bbb; max-width: 520px; margin: 0 auto 2.5rem;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--gold); color: var(--dark);
+      padding: .85rem 2.2rem; border-radius: 8px; font-weight: 800;
+      font-size: 1rem; text-decoration: none; transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,161,74,.4); }
+
+    .btn-outline {
+      border: 2px solid #555; color: #ccc;
+      padding: .85rem 2.2rem; border-radius: 8px; font-weight: 700;
+      font-size: 1rem; text-decoration: none; transition: border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 4rem; position: relative; z-index: 1;
+    }
+
+    .stat { text-align: center; color: var(--white); }
+    .stat-num { font-size: 2.5rem; font-weight: 900; color: var(--gold); }
+    .stat-lbl { font-size: .85rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ===== SECTION COMMON ===== */
+    section { padding: 90px 5%; }
+
+    .section-label {
+      display: inline-block; font-size: .78rem; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 900; margin-bottom: 1rem;
+    }
+
+    .section-sub { color: #666; max-width: 520px; margin-bottom: 3rem; }
+
+    /* ===== BEFORE / AFTER SLIDER ===== */
+    #lavori { background: var(--white); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--dark);
+    }
+
+    .project-header {
+      padding: 1rem 1.2rem 1rem;
+    }
+
+    .project-category {
+      display: inline-block;
+      font-size: .75rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: .35rem;
+    }
+
+    .project-card h3 {
+      color: var(--white); font-size: 1.15rem; font-weight: 800;
+      margin-bottom: .25rem;
+    }
+
+    .project-card p {
+      color: #999; font-size: .88rem;
+    }
+
+    /* Slider prima/dopo */
+    .ba-container {
+      position: relative; cursor: ew-resize;
+      user-select: none; overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .ba-after, .ba-before {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+    }
+
+    .ba-before img, .ba-after img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    .ba-after {
+      clip-path: inset(0 50% 0 0);
+      transition: clip-path .05s;
+    }
+
+    .ba-divider {
+      position: absolute; top: 0; bottom: 0;
+      width: 3px; background: var(--gold);
+      left: 50%; transform: translateX(-50%);
+      transition: left .05s;
+      pointer-events: none;
+    }
+
+    .ba-handle {
+      position: absolute; top: 50%;
+      width: 44px; height: 44px;
+      background: var(--gold);
+      border-radius: 50%;
+      left: 50%; transform: translate(-50%, -50%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,.4);
+      pointer-events: none;
+      transition: left .05s;
+    }
+
+    .ba-handle svg { fill: var(--dark); width: 20px; height: 20px; }
+
+    .ba-label {
+      position: absolute; top: 12px; padding: .3rem .8rem;
+      font-size: .75rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; border-radius: 4px; pointer-events: none;
+    }
+
+    .label-prima { left: 12px; background: rgba(0,0,0,.65); color: #fff; }
+    .label-dopo  { right: 12px; background: var(--gold); color: var(--dark); }
+
+    /* ===== SERVICES ===== */
+    #servizi { background: var(--light); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+    .service-icon {
+      font-size: 2.2rem; margin-bottom: 1rem;
+    }
+
+    .service-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: .4rem; }
+    .service-card p  { font-size: .88rem; color: #666; }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonianze { background: var(--dark); }
+
+    #testimonianze .section-title { color: var(--white); }
+    #testimonianze .section-sub   { color: #888; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .testi-card {
+      background: var(--mid);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      border-left: 4px solid var(--gold);
+    }
+
+    .stars { color: var(--gold); font-size: 1.1rem; margin-bottom: .8rem; }
+
+    .testi-card p { color: #ccc; font-size: .93rem; font-style: italic; margin-bottom: 1rem; }
+
+    .testi-author { font-weight: 700; color: var(--white); font-size: .9rem; }
+    .testi-city   { font-size: .8rem; color: #777; }
+
+    /* ===== CONTACT ===== */
+    #contatti { background: var(--light); }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      text-decoration: none;
+      color: var(--dark);
+      display: flex; flex-direction: column; align-items: center; gap: .6rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .contact-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+    .contact-card-icon {
+      font-size: 2rem;
+      color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: .4rem;
+    }
+
+    .contact-card svg { color: var(--gold); }
+
+    .contact-card strong {
+      font-size: .8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: #999;
+    }
+
+    .contact-card span {
+      font-size: .95rem; font-weight: 600; color: var(--dark); text-align: center;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #111; color: #666;
+      text-align: center; padding: 2rem 5%;
+      font-size: .85rem;
+    }
+
+    footer span { color: var(--gold); }
+
+    /* ===== SCROLL TO TOP ===== */
+    .scroll-top {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--gold); color: var(--dark);
+      border: none; cursor: pointer; font-size: 1.2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      display: none; align-items: center; justify-content: center;
+      transition: transform .2s;
+    }
+    .scroll-top:hover { transform: translateY(-3px); }
+    .scroll-top.visible { display: flex; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: #1a1a1a; padding: 1.5rem 5%; gap: 1.2rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+
+      .contact-wrap { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">&#9775; Calavetta Ristrutturazioni</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#lavori">I Nostri Lavori</a></li>
+    <li><a href="#servizi">Servizi</a></li>
+<li><a href="#contatti" class="nav-cta">Contatti</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="badge">Ristrutturazioni Edili dal 2005</span>
+    <h1>Trasformiamo<br><span>la tua casa</span><br>in un sogno</h1>
+    <p>Bagni, cucine, pavimenti, intonaci e molto altro. Vedi la differenza con i nostri lavori prima e dopo.</p>
+    <div class="hero-btns">
+      <a href="#lavori" class="btn-primary">Guarda i Lavori</a>
+      <a href="#contatti" class="btn-outline">Contattaci</a>
+    </div>
+  </div>
+</section>
+
+<!-- LAVORI PRIMA/DOPO -->
+<section id="lavori">
+  <div style="max-width:1200px; margin:0 auto;">
+    <span class="section-label">I Nostri Lavori</span>
+    <h2 class="section-title">I Lavori Svolti</h2>
+    <p class="section-sub">Trascina il cursore su ogni progetto per vedere com'era e com'è diventato.</p>
+
+    <div class="projects-grid">
+
+      <!-- =====================================================
+           COME AGGIUNGERE UN NUOVO LAVORO:
+           1. Copia il blocco qui sotto (da "div class=project-card" fino al suo "/div")
+           2. Cambia il nome cliente, la categoria e la descrizione
+           3. Metti le tue foto nella cartella img/ e aggiorna i src
+           ===================================================== -->
+
+      <!-- LAVORO: Sig. Rossi – Bagno -->
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-category">🚿 Bagno</span>
+          <h3>Sig. Rossi</h3>
+          <p>Rifacimento totale con box doccia walk-in e sanitari sospesi</p>
+        </div>
+        <div class="ba-container" data-slider>
+          <div class="ba-before">
+            <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80" alt="Prima" />
+          </div>
+          <div class="ba-after">
+            <img src="https://images.unsplash.com/photo-1620626011761-996317702fbf?w=800&q=80" alt="Dopo" />
+          </div>
+          <div class="ba-divider"></div>
+          <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
+          <span class="ba-label label-prima">Prima</span>
+          <span class="ba-label label-dopo">Dopo</span>
+        </div>
+      </div>
+
+      <!-- LAVORO: Sig. Bianchi – Cucina -->
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-category">🍳 Cucina</span>
+          <h3>Sig. Bianchi</h3>
+          <p>Demolizione e ricostruzione con isola centrale e top in quarzo</p>
+        </div>
+        <div class="ba-container" data-slider>
+          <div class="ba-before">
+            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80" alt="Prima" />
+          </div>
+          <div class="ba-after">
+            <img src="https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=800&q=80" alt="Dopo" />
+          </div>
+          <div class="ba-divider"></div>
+          <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
+          <span class="ba-label label-prima">Prima</span>
+          <span class="ba-label label-dopo">Dopo</span>
+        </div>
+      </div>
+
+      <!-- LAVORO: Sig.ra Verdi – Soggiorno -->
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-category">🏠 Soggiorno</span>
+          <h3>Sig.ra Verdi</h3>
+          <p>Posa parquet, tinteggiatura e rifacimento controsoffitto con LED</p>
+        </div>
+        <div class="ba-container" data-slider>
+          <div class="ba-before">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Prima" />
+          </div>
+          <div class="ba-after">
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80" alt="Dopo" />
+          </div>
+          <div class="ba-divider"></div>
+          <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
+          <span class="ba-label label-prima">Prima</span>
+          <span class="ba-label label-dopo">Dopo</span>
+        </div>
+      </div>
+
+      <!-- LAVORO: Fam. Ferrari – Camera -->
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-category">🛏 Camera</span>
+          <h3>Fam. Ferrari</h3>
+          <p>Cabina armadio su misura, cartongesso e illuminazione LED indiretta</p>
+        </div>
+        <div class="ba-container" data-slider>
+          <div class="ba-before">
+            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80" alt="Prima" />
+          </div>
+          <div class="ba-after">
+            <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80" alt="Dopo" />
+          </div>
+          <div class="ba-divider"></div>
+          <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
+          <span class="ba-label label-prima">Prima</span>
+          <span class="ba-label label-dopo">Dopo</span>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           AGGIUNGI QUI I TUOI NUOVI LAVORI — COPIA QUESTO BLOCCO:
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-category">🚿 Bagno</span>   ← cambia emoji e categoria
+          <h3>Sig. COGNOME</h3>                             ← nome cliente
+          <p>Breve descrizione del lavoro svolto.</p>
+        </div>
+        <div class="ba-container" data-slider>
+          <div class="ba-before">
+            <img src="img/NOME-prima.jpg" alt="Prima" />    ← foto prima
+          </div>
+          <div class="ba-after">
+            <img src="img/NOME-dopo.jpg" alt="Dopo" />      ← foto dopo
+          </div>
+          <div class="ba-divider"></div>
+          <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
+          <span class="ba-label label-prima">Prima</span>
+          <span class="ba-label label-dopo">Dopo</span>
+        </div>
+      </div>
+
+           ===================================================== -->
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVIZI -->
+<section id="servizi">
+  <div style="max-width:1200px; margin:0 auto;">
+    <span class="section-label">Cosa Facciamo</span>
+    <h2 class="section-title">I Nostri Servizi</h2>
+    <p class="section-sub">Dalla piccola riparazione alla ristrutturazione completa. Preventivo gratuito entro 24h.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🚿</div>
+        <h3>Ristrutturazione Bagni</h3>
+        <p>Demolizione, impianti, piastrelle, sanitari sospesi, box doccia e vasche.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🍳</div>
+        <h3>Rifacimento Cucine</h3>
+        <p>Impianti idraulici e gas, posa top, maioliche, e nuove pareti attrezzate.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h3>Ristrutturazione Completa</h3>
+        <p>Gestione chiavi in mano di tutto l'appartamento: una sola ditta, nessun pensiero.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪵</div>
+        <h3>Pavimenti & Rivestimenti</h3>
+        <p>Posa parquet, gres porcellanato, microcemento, rasature e tinteggiature.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <div style="max-width:800px; margin:0 auto; text-align:center;">
+    <span class="section-label">Contattaci</span>
+    <h2 class="section-title">Siamo qui per te</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">Chiamaci, scrivici o seguici sui social. Siamo sempre disponibili per rispondere a ogni domanda.</p>
+
+    <div class="contact-cards">
+      <a href="tel:+390212345678" class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <strong>Telefono / WhatsApp</strong>
+        <span>+39 02 1234 5678</span>
+      </a>
+      <a href="mailto:info@calavettaristrutturazioni.it" class="contact-card">
+        <div class="contact-card-icon">📧</div>
+        <strong>Email</strong>
+        <span>info@calavettaristrutturazioni.it</span>
+      </a>
+      <a href="https://www.instagram.com/calavettaristrutturazioni" target="_blank" rel="noopener" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <strong>Instagram</strong>
+        <span>@calavettaristrutturazioni</span>
+      </a>
+      <a href="https://www.facebook.com/calavettaristrutturazioni" target="_blank" rel="noopener" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </div>
+        <strong>Facebook</strong>
+        <span>Calavetta Ristrutturazioni</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 <span>Calavetta Ristrutturazioni</span> – P.IVA 00000000000 – Tutti i diritti riservati</p>
+</footer>
+
+<!-- SCROLL TOP BTN -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  /* ===== HAMBURGER ===== */
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  /* ===== SCROLL TOP ===== */
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollTop');
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  /* ===== BEFORE / AFTER SLIDERS ===== */
+  document.querySelectorAll('[data-slider]').forEach(slider => {
+    const after    = slider.querySelector('.ba-after');
+    const divider  = slider.querySelector('.ba-divider');
+    const handle   = slider.querySelector('.ba-handle');
+    let dragging   = false;
+
+    function setPos(x) {
+      const rect = slider.getBoundingClientRect();
+      let pct = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+      const p = (pct * 100).toFixed(1) + '%';
+      after.style.clipPath   = `inset(0 ${(100 - pct * 100).toFixed(1)}% 0 0)`;
+      divider.style.left     = p;
+      handle.style.left      = p;
+    }
+
+    slider.addEventListener('mousedown',  e => { dragging = true; setPos(e.clientX); });
+    window.addEventListener('mousemove',  e => { if (dragging) setPos(e.clientX); });
+    window.addEventListener('mouseup',    ()  => { dragging = false; });
+
+    slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchmove',  e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchend',   ()  => { dragging = false; });
+  });
+
+  /* ===== SCROLL ANIMATION ===== */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.project-card, .service-card, .testi-card').forEach(el => {
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(30px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
