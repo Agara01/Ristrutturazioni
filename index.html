@@ -152,67 +152,44 @@
 
     .section-sub { color: #666; max-width: 520px; margin-bottom: 3rem; }
 
-    /* ===== LAVORI PRIMA/DOPO ===== */
-    #lavori { background: var(--white); }
+    /* ===== GALLERIA LAVORI ===== */
+    #lavori { background: var(--white); overflow: hidden; }
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+    .gallery-wrapper {
+      overflow: hidden;
+      width: 100%;
+      cursor: grab;
+      user-select: none;
+      padding: .5rem 0;
+    }
+    .gallery-wrapper:active { cursor: grabbing; }
+
+    .gallery-track {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
     }
 
-    .project-card {
+    .gallery-item {
+      width: 320px;
+      height: 240px;
       border-radius: var(--radius);
       overflow: hidden;
+      flex-shrink: 0;
       box-shadow: var(--shadow);
-      background: var(--dark);
     }
 
-    .ba-container {
-      position: relative; cursor: ew-resize;
-      user-select: none; overflow: hidden;
-      aspect-ratio: 4/3;
-    }
-
-    .ba-after, .ba-before {
-      position: absolute; inset: 0;
+    .gallery-item img {
       width: 100%; height: 100%;
-    }
-
-    .ba-before img, .ba-after img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-    }
-
-    .ba-after { clip-path: inset(0 50% 0 0); transition: clip-path .05s; }
-
-    .ba-divider {
-      position: absolute; top: 0; bottom: 0;
-      width: 3px; background: var(--gold);
-      left: 50%; transform: translateX(-50%);
-      transition: left .05s;
+      object-fit: cover; display: block;
       pointer-events: none;
+      transition: transform .4s;
     }
+    .gallery-item:hover img { transform: scale(1.05); }
 
-    .ba-handle {
-      position: absolute; top: 50%;
-      width: 44px; height: 44px;
-      background: var(--gold); border-radius: 50%;
-      left: 50%; transform: translate(-50%, -50%);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,.4);
-      pointer-events: none; transition: left .05s;
+    @media (max-width: 768px) {
+      .gallery-item { width: 260px; height: 195px; }
     }
-
-    .ba-handle svg { fill: var(--dark); width: 20px; height: 20px; }
-
-    .ba-label {
-      position: absolute; top: 12px; padding: .3rem .8rem;
-      font-size: .75rem; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; border-radius: 4px; pointer-events: none;
-    }
-
-    .label-prima { left: 12px; background: rgba(0,0,0,.65); color: #fff; }
-    .label-dopo  { right: 12px; background: var(--gold); color: var(--dark); }
 
     /* ===== SERVICES ===== */
     #servizi { background: var(--light); }
@@ -319,7 +296,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="#">🧱 CALAVETTA RISTRUTTURAZIONI</a>
+  <a class="logo" href="#"><i class="fa-solid fa-trowel-bricks"></i> CALAVETTA RISTRUTTURAZIONI</a>
 
   <div class="nav-contact-info">
     <a href="tel:+393663634700" class="nav-contact-item" aria-label="Chiama">
@@ -359,79 +336,56 @@
   </div>
 </section>
 
-<!-- LAVORI PRIMA/DOPO -->
+<!-- GALLERIA LAVORI -->
 <section id="lavori">
   <div style="max-width:1200px; margin:0 auto;">
     <span class="section-label">I Nostri Lavori</span>
     <h2 class="section-title">I Lavori Svolti</h2>
-    <p class="section-sub">Trascina il cursore su ogni progetto per vedere com'era e com'è diventato.</p>
+    <p class="section-sub">Scorri per vedere i nostri interventi. Passa il dito o il cursore per sfogliare.</p>
+  </div>
 
-    <div class="projects-grid">
-
-      <!-- LAVORO 1 -->
-      <div class="project-card">
-        <div class="ba-container" data-slider>
-          <div class="ba-before">
-            <img src="img/vecchia-casa-rovinata-inabitabile-senza-finestre-e-porte_116124-14400.avif" alt="Prima" />
-          </div>
-          <div class="ba-after">
-            <img src="img/casa-ristrutturata-prima-e-dopo-torino.jpg" alt="Dopo" />
-          </div>
-          <div class="ba-divider"></div>
-          <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
-          <span class="ba-label label-prima">Prima</span>
-          <span class="ba-label label-dopo">Dopo</span>
-        </div>
+  <div class="gallery-wrapper" id="galleryWrapper">
+    <div class="gallery-track" id="galleryTrack">
+      <!-- FOTO 1 -->
+      <div class="gallery-item">
+        <img src="img/vecchia-casa-rovinata-inabitabile-senza-finestre-e-porte_116124-14400.avif" alt="Lavoro 1" />
       </div>
-
-      <!-- LAVORO 2 -->
-      <div class="project-card">
-        <div class="ba-container" data-slider>
-          <div class="ba-before">
-            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80" alt="Prima" />
-          </div>
-          <div class="ba-after">
-            <img src="https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=800&q=80" alt="Dopo" />
-          </div>
-          <div class="ba-divider"></div>
-          <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
-          <span class="ba-label label-prima">Prima</span>
-          <span class="ba-label label-dopo">Dopo</span>
-        </div>
+      <!-- FOTO 2 -->
+      <div class="gallery-item">
+        <img src="img/casa-ristrutturata-prima-e-dopo-torino.jpg" alt="Lavoro 2" />
       </div>
-
-      <!-- LAVORO 3 -->
-      <div class="project-card">
-        <div class="ba-container" data-slider>
-          <div class="ba-before">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Prima" />
-          </div>
-          <div class="ba-after">
-            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80" alt="Dopo" />
-          </div>
-          <div class="ba-divider"></div>
-          <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
-          <span class="ba-label label-prima">Prima</span>
-          <span class="ba-label label-dopo">Dopo</span>
-        </div>
+      <!-- FOTO 3 — sostituisci src con la tua foto -->
+      <div class="gallery-item">
+        <img src="img/vecchia-casa-rovinata-inabitabile-senza-finestre-e-porte_116124-14400.avif" alt="Lavoro 3" />
       </div>
-
-      <!-- LAVORO 4 -->
-      <div class="project-card">
-        <div class="ba-container" data-slider>
-          <div class="ba-before">
-            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80" alt="Prima" />
-          </div>
-          <div class="ba-after">
-            <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80" alt="Dopo" />
-          </div>
-          <div class="ba-divider"></div>
-          <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
-          <span class="ba-label label-prima">Prima</span>
-          <span class="ba-label label-dopo">Dopo</span>
-        </div>
+      <!-- FOTO 4 — sostituisci src con la tua foto -->
+      <div class="gallery-item">
+        <img src="img/casa-ristrutturata-prima-e-dopo-torino.jpg" alt="Lavoro 4" />
       </div>
-
+      <!-- FOTO 5 — sostituisci src con la tua foto -->
+      <div class="gallery-item">
+        <img src="img/vecchia-casa-rovinata-inabitabile-senza-finestre-e-porte_116124-14400.avif" alt="Lavoro 5" />
+      </div>
+      <!-- FOTO 6 — sostituisci src con la tua foto -->
+      <div class="gallery-item">
+        <img src="img/casa-ristrutturata-prima-e-dopo-torino.jpg" alt="Lavoro 6" />
+      </div>
+      <!-- FOTO 7 — sostituisci src con la tua foto -->
+      <div class="gallery-item">
+        <img src="img/vecchia-casa-rovinata-inabitabile-senza-finestre-e-porte_116124-14400.avif" alt="Lavoro 7" />
+      </div>
+      <!-- FOTO 8 — sostituisci src con la tua foto -->
+      <div class="gallery-item">
+        <img src="img/casa-ristrutturata-prima-e-dopo-torino.jpg" alt="Lavoro 8" />
+      </div>
+      <!-- FOTO 9 — sostituisci src con la tua foto -->
+      <div class="gallery-item">
+        <img src="img/vecchia-casa-rovinata-inabitabile-senza-finestre-e-porte_116124-14400.avif" alt="Lavoro 9" />
+      </div>
+      <!-- FOTO 10 — sostituisci src con la tua foto -->
+      <div class="gallery-item">
+        <img src="img/casa-ristrutturata-prima-e-dopo-torino.jpg" alt="Lavoro 10" />
+      </div>
     </div>
   </div>
 </section>
@@ -522,29 +476,70 @@
     document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
   });
 
-  /* BEFORE / AFTER SLIDERS */
-  document.querySelectorAll('[data-slider]').forEach(slider => {
-    const after   = slider.querySelector('.ba-after');
-    const divider = slider.querySelector('.ba-divider');
-    const handle  = slider.querySelector('.ba-handle');
-    let dragging  = false;
+  /* GALLERIA AUTO-SCROLL */
+  (function() {
+    const wrapper = document.getElementById('galleryWrapper');
+    const track   = document.getElementById('galleryTrack');
 
-    function setPos(x) {
-      const rect = slider.getBoundingClientRect();
-      let pct = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
-      const p = (pct * 100).toFixed(1) + '%';
-      after.style.clipPath = `inset(0 ${(100 - pct * 100).toFixed(1)}% 0 0)`;
-      divider.style.left   = p;
-      handle.style.left    = p;
+    // Duplica le foto per loop infinito
+    track.innerHTML += track.innerHTML;
+
+    const halfWidth = () => track.scrollWidth / 2;
+    let pos      = 0;
+    const speed  = 0.8; // px per frame
+    let paused   = false;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartPos = 0;
+
+    function animate() {
+      if (!paused && !dragging) {
+        pos += speed;
+        if (pos >= halfWidth()) pos = 0;
+        track.style.transform = `translateX(-${pos}px)`;
+      }
+      requestAnimationFrame(animate);
     }
 
-    slider.addEventListener('mousedown',  e => { dragging = true; setPos(e.clientX); });
-    window.addEventListener('mousemove',  e => { if (dragging) setPos(e.clientX); });
-    window.addEventListener('mouseup',    ()  => { dragging = false; });
-    slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
-    window.addEventListener('touchmove',  e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
-    window.addEventListener('touchend',   ()  => { dragging = false; });
-  });
+    // Pausa su hover desktop
+    wrapper.addEventListener('mouseenter', () => { paused = true; });
+    wrapper.addEventListener('mouseleave', () => { paused = false; });
+
+    // Drag mouse
+    wrapper.addEventListener('mousedown', e => {
+      dragging = true;
+      dragStartX   = e.clientX;
+      dragStartPos = pos;
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const delta = dragStartX - e.clientX;
+      pos = Math.max(0, Math.min(halfWidth() - 1, dragStartPos + delta));
+      track.style.transform = `translateX(-${pos}px)`;
+    });
+    window.addEventListener('mouseup', () => { dragging = false; });
+
+    // Touch
+    wrapper.addEventListener('touchstart', e => {
+      paused       = true;
+      dragging     = true;
+      dragStartX   = e.touches[0].clientX;
+      dragStartPos = pos;
+    }, { passive: true });
+    wrapper.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      const delta = dragStartX - e.touches[0].clientX;
+      pos = Math.max(0, Math.min(halfWidth() - 1, dragStartPos + delta));
+      track.style.transform = `translateX(-${pos}px)`;
+    }, { passive: true });
+    wrapper.addEventListener('touchend', () => {
+      dragging = false;
+      paused   = false;
+    });
+
+    animate();
+  })();
 
   /* SCROLL ANIMATION */
   const observer = new IntersectionObserver((entries) => {
@@ -556,7 +551,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.project-card, .service-card').forEach(el => {
+  document.querySelectorAll('.service-card').forEach(el => {
     el.style.opacity    = '0';
     el.style.transform  = 'translateY(30px)';
     el.style.transition = 'opacity .5s ease, transform .5s ease';
