@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CALAVETTA RISTRUTTURAZIONI</title>
-  <link rel="icon" type="img-sfondo" href="favicon.svg">
+  <link rel="icon" type="image/png" href="img-sfondo/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -71,6 +72,16 @@
 
     .nav-contact-item:hover { color: #fff !important; }
 
+    .nav-social-icon {
+      color: var(--gold);
+      font-size: 1.3rem;
+      text-decoration: none;
+      transition: color .2s, transform .2s;
+      display: flex;
+      align-items: center;
+    }
+    .nav-social-icon:hover { color: #fff; transform: scale(1.2); }
+
     /* Link destra */
     .nav-links { display: flex; gap: 2rem; list-style: none; flex-shrink: 0; }
     .nav-links a {
@@ -100,8 +111,8 @@
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: url('img-sfondo/sfondo.jpg') center/cover;
-      opacity: .40;
+      background: url('img-sfondo/muratore.webp') center/cover;
+      opacity: .12;
     }
 
     .hero-content { position: relative; z-index: 1; max-width: 760px; }
@@ -321,6 +332,12 @@
     </a>
     <a href="mailto:info@calavettaristrutturazioni.it" class="nav-contact-item">
       📧 <span>info@calavettaristrutturazioni.it</span>
+    </a>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="Instagram">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="Facebook">
+      <i class="fa-brands fa-facebook"></i>
     </a>
   </div>
 
