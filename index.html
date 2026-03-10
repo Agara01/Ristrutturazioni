@@ -140,8 +140,8 @@
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
     }
 
     .project-card {
@@ -149,26 +149,6 @@
       overflow: hidden;
       box-shadow: var(--shadow);
       background: var(--dark);
-    }
-
-    .project-header {
-      padding: 1rem 1.2rem 1rem;
-    }
-
-    .project-category {
-      display: inline-block;
-      font-size: .75rem; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: .35rem;
-    }
-
-    .project-card h3 {
-      color: var(--white); font-size: 1.15rem; font-weight: 800;
-      margin-bottom: .25rem;
-    }
-
-    .project-card p {
-      color: #999; font-size: .88rem;
     }
 
     /* Slider prima/dopo */
@@ -343,6 +323,23 @@
       .nav-links.open { display: flex; }
       .hamburger { display: flex; }
 
+      section { padding: 60px 4%; }
+
+      .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .contact-cards { grid-template-columns: repeat(2, 1fr); }
+
+      .hero { padding: 90px 5% 50px; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
+    }
+
+    @media (max-width: 420px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .contact-cards { grid-template-columns: 1fr; }
+      .logo { font-size: 1.1rem; }
     }
   </style>
 </head>
@@ -383,20 +380,8 @@
 
     <div class="projects-grid">
 
-      <!-- =====================================================
-           COME AGGIUNGERE UN NUOVO LAVORO:
-           1. Copia il blocco qui sotto (da "div class=project-card" fino al suo "/div")
-           2. Cambia il nome cliente, la categoria e la descrizione
-           3. Metti le tue foto nella cartella img/ e aggiorna i src
-           ===================================================== -->
-
-      <!-- LAVORO: Sig. Rossi – Bagno -->
+      <!-- LAVORO 1 -->
       <div class="project-card">
-        <div class="project-header">
-          <span class="project-category">🚿 Bagno</span>
-          <h3>Sig. Rossi</h3>
-          <p>Rifacimento totale con box doccia walk-in e sanitari sospesi</p>
-        </div>
         <div class="ba-container" data-slider>
           <div class="ba-before">
             <img src="img/vecchia-casa-rovinata-inabitabile-senza-finestre-e-porte_116124-14400.avif" alt="Prima" />
@@ -411,13 +396,8 @@
         </div>
       </div>
 
-      <!-- LAVORO: Sig. Bianchi – Cucina -->
+      <!-- LAVORO 2 -->
       <div class="project-card">
-        <div class="project-header">
-          <span class="project-category">🍳 Cucina</span>
-          <h3>Sig. Bianchi</h3>
-          <p>Demolizione e ricostruzione con isola centrale e top in quarzo</p>
-        </div>
         <div class="ba-container" data-slider>
           <div class="ba-before">
             <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80" alt="Prima" />
@@ -432,13 +412,8 @@
         </div>
       </div>
 
-      <!-- LAVORO: Sig.ra Verdi – Soggiorno -->
+      <!-- LAVORO 3 -->
       <div class="project-card">
-        <div class="project-header">
-          <span class="project-category">🏠 Soggiorno</span>
-          <h3>Sig.ra Verdi</h3>
-          <p>Posa parquet, tinteggiatura e rifacimento controsoffitto con LED</p>
-        </div>
         <div class="ba-container" data-slider>
           <div class="ba-before">
             <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Prima" />
@@ -453,13 +428,8 @@
         </div>
       </div>
 
-      <!-- LAVORO: Fam. Ferrari – Camera -->
+      <!-- LAVORO 4 -->
       <div class="project-card">
-        <div class="project-header">
-          <span class="project-category">🛏 Camera</span>
-          <h3>Fam. Ferrari</h3>
-          <p>Cabina armadio su misura, cartongesso e illuminazione LED indiretta</p>
-        </div>
         <div class="ba-container" data-slider>
           <div class="ba-before">
             <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80" alt="Prima" />
@@ -474,30 +444,18 @@
         </div>
       </div>
 
-      <!-- =====================================================
-           AGGIUNGI QUI I TUOI NUOVI LAVORI — COPIA QUESTO BLOCCO:
-
+      <!-- AGGIUNGI NUOVI LAVORI QUI:
       <div class="project-card">
-        <div class="project-header">
-          <span class="project-category">🚿 Bagno</span>   ← cambia emoji e categoria
-          <h3>Sig. COGNOME</h3>                             ← nome cliente
-          <p>Breve descrizione del lavoro svolto.</p>
-        </div>
         <div class="ba-container" data-slider>
-          <div class="ba-before">
-            <img src="img/NOME-prima.jpg" alt="Prima" />    ← foto prima
-          </div>
-          <div class="ba-after">
-            <img src="img/NOME-dopo.jpg" alt="Dopo" />      ← foto dopo
-          </div>
+          <div class="ba-before"><img src="img/NOME-prima.jpg" alt="Prima" /></div>
+          <div class="ba-after"><img src="img/NOME-dopo.jpg" alt="Dopo" /></div>
           <div class="ba-divider"></div>
           <div class="ba-handle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/></svg></div>
           <span class="ba-label label-prima">Prima</span>
           <span class="ba-label label-dopo">Dopo</span>
         </div>
       </div>
-
-           ===================================================== -->
+      -->
 
     </div>
   </div>
