@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Sfondo scuro -->
+  <rect width="64" height="64" rx="10" fill="#1a1a1a"/>
+  
+  <!-- Riga 1 mattoni -->
+  <rect x="4"  y="8"  width="26" height="12" rx="2" fill="#c9a14a"/>
+  <rect x="34" y="8"  width="26" height="12" rx="2" fill="#c9a14a"/>
+
+  <!-- Riga 2 mattoni (sfalsata) -->
+  <rect x="4"  y="22" width="12" height="12" rx="2" fill="#c9a14a"/>
+  <rect x="20" y="22" width="26" height="12" rx="2" fill="#c9a14a"/>
+  <rect x="50" y="22" width="10" height="12" rx="2" fill="#c9a14a"/>
+
+  <!-- Riga 3 mattoni -->
+  <rect x="4"  y="36" width="26" height="12" rx="2" fill="#c9a14a"/>
+  <rect x="34" y="36" width="26" height="12" rx="2" fill="#c9a14a"/>
+
+  <!-- Riga 4 mattoni (sfalsata) -->
+  <rect x="4"  y="50" width="12" height="12" rx="2" fill="#c9a14a"/>
+  <rect x="20" y="50" width="26" height="12" rx="2" fill="#c9a14a"/>
+  <rect x="50" y="50" width="10" height="12" rx="2" fill="#c9a14a"/>
+</svg>
