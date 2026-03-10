@@ -280,21 +280,20 @@
     .scroll-top.visible { display: flex; }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
+      .logo { display: none; }
       .nav-contact-info {
         position: static;
         transform: none;
+        flex: 1;
+        justify-content: center;
+        gap: 1.2rem;
       }
     }
 
     @media (max-width: 768px) {
       .nav-contact-info {
-        position: static;
-        transform: none;
         gap: .9rem;
-        order: 2;
-        flex: 1;
-        justify-content: center;
       }
       .nav-contact-item,
       .nav-social-icon { font-size: 1.15rem; }
@@ -313,7 +312,6 @@
     @media (max-width: 420px) {
       .services-grid { grid-template-columns: 1fr; }
       .contact-cards { grid-template-columns: 1fr; }
-      .logo { display: none; }
     }
   </style>
 </head>
