@@ -207,12 +207,21 @@
       transition: transform .2s, box-shadow .2s;
     }
     .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-    .service-icon { font-size: 2.2rem; margin-bottom: 1rem; color: var(--gold); }
+    .service-icon {
+  width: 58px; height: 58px;
+  background: var(--gold);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
+  color: var(--white);
+  box-shadow: 0 4px 14px rgba(201,161,74,.35);
+}
     .service-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: .4rem; }
     .service-card p  { font-size: .88rem; color: #666; }
 
     /* ===== CONTACT ===== */
-    #contatti { background: var(--light); }
+    #contatti { background: var(--white); }
 
     .contact-cards {
       display: grid;
@@ -303,9 +312,56 @@
     @media (max-width: 420px) {
       .services-grid { grid-template-columns: 1fr; }
     }
+    /* ===== WHATSAPP BUTTON ===== */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  font-size: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,.45);
+  text-decoration: none;
+  z-index: 999;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 28px rgba(37,211,102,.55);
+}
+
+/* Animazione pulse per attirare l'attenzione */
+.whatsapp-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25d366;
+  z-index: -1;
+  animation: wa-pulse 2s ease-out infinite;
+}
+
+@keyframes wa-pulse {
+  0%   { transform: scale(1);   opacity: .6; }
+  70%  { transform: scale(1.5); opacity: 0;  }
+  100% { transform: scale(1.5); opacity: 0;  }
+}
   </style>
 </head>
 <body>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<a href="https://wa.me/393663634700" target="_blank" rel="noopener noreferrer"
+   class="whatsapp-btn" aria-label="Contattaci su WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
 
 <!-- NAV -->
 <nav>
@@ -318,10 +374,10 @@
     <a href="mailto:info@calavettaristrutturazioni.it" class="nav-contact-item" aria-label="Email">
       <i class="fa-solid fa-envelope"></i>
     </a>
-    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="Instagram">
+    <a href="https://www.instagram.com/calavettaristrutturazioni" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="Instagram">
       <i class="fa-brands fa-instagram"></i>
     </a>
-    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="Facebook">
+    <a href="https://www.facebook.com/calavettaristrutturazioni" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="Facebook">
       <i class="fa-brands fa-facebook"></i>
     </a>
   </div>
