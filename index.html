@@ -207,7 +207,7 @@
       transition: transform .2s, box-shadow .2s;
     }
     .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-    .service-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .service-icon { font-size: 2.2rem; margin-bottom: 1rem; color: var(--gold); }
     .service-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: .4rem; }
     .service-card p  { font-size: .88rem; color: #666; }
 
@@ -216,7 +216,7 @@
 
     .contact-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
 
@@ -257,11 +257,6 @@
     .scroll-top:hover { transform: translateY(-3px); }
     .scroll-top.visible { display: flex; }
 
-    /* ===== CONTACT CARDS: 2 colonne su schermi medi ===== */
-    @media (max-width: 960px) {
-      .contact-cards { grid-template-columns: repeat(2, 1fr); }
-    }
-
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .logo { display: none; }
@@ -275,12 +270,14 @@
     }
 
     @media (max-width: 768px) {
-      /* Logo: mostra icona + nome completo (font ridotto) */
-      .logo { display: flex; align-items: center; font-size: 0.82rem; flex-shrink: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
+      /* Logo: testo visibile, si riduce proporzionalmente col viewport */
+      .logo { display: flex; align-items: center; font-size: clamp(0.68rem, 2.4vw, 1.3rem); flex-shrink: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
       .logo-text { display: inline; }
 
-      /* Nascondi icone contatto nella nav: sono già nella sezione Contatti */
-      .nav-contact-info { display: none; }
+      /* Icone nav: sempre visibili, dimensione proporzionale al viewport */
+      .nav-contact-info { display: flex; position: static; transform: none; flex-shrink: 0; gap: clamp(0.35rem, 1.8vw, 1.2rem); }
+      .nav-contact-item,
+      .nav-social-icon { font-size: clamp(0.95rem, 3vw, 1.25rem); }
 
       .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: #1a1a1a; padding: 1.5rem 5%; gap: 1.2rem; }
       .nav-links.open { display: flex; }
@@ -414,22 +411,22 @@
     <p class="section-sub">Dalla piccola riparazione alla ristrutturazione completa. Preventivo gratuito, contattaci.</p>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon">🚿</div>
+        <div class="service-icon"><i class="fa-solid fa-shower"></i></div>
         <h3>Ristrutturazione Bagni</h3>
         <p>Demolizione, impianti, piastrelle, sanitari sospesi, box doccia e vasche.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon">🍳</div>
+        <div class="service-icon"><i class="fa-solid fa-kitchen-set"></i></div>
         <h3>Rifacimento Cucine</h3>
         <p>Impianti idraulici e gas, posa top, maioliche, e nuove pareti attrezzate.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon">🏠</div>
+        <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
         <h3>Ristrutturazione Completa</h3>
         <p>Gestione chiavi in mano di tutto l'appartamento: una sola ditta, nessun pensiero.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon">🪵</div>
+        <div class="service-icon"><i class="fa-solid fa-border-all"></i></div>
         <h3>Pavimenti & Rivestimenti</h3>
         <p>Posa parquet, gres porcellanato, microcemento, rasature e tinteggiature.</p>
       </div>
@@ -446,14 +443,14 @@
 
     <div class="contact-cards">
       <a href="tel:+393663634700" class="contact-card">
-        <div class="contact-card-icon">📞</div>
+        <div class="contact-card-icon"><i class="fa-solid fa-phone"></i></div>
         <div class="contact-card-info">
           <strong>Telefono / WhatsApp</strong>
           <span>366 363 4700</span>
         </div>
       </a>
       <a href="mailto:info@calavettaristrutturazioni.it" class="contact-card">
-        <div class="contact-card-icon">📧</div>
+        <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
         <div class="contact-card-info">
           <strong>Email</strong>
           <span>info@calavettaristrutturazioni.it</span>
