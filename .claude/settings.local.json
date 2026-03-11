@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find c:Usersmarcosito-ristrutturazioni -type f -name *.css -o -name *.scss -o -name *.less)"
+    ]
+  }
+}
