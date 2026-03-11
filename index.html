@@ -257,6 +257,11 @@
     .scroll-top:hover { transform: translateY(-3px); }
     .scroll-top.visible { display: flex; }
 
+    /* ===== CONTACT CARDS: 2 colonne su schermi medi ===== */
+    @media (max-width: 960px) {
+      .contact-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .logo { display: none; }
@@ -270,19 +275,12 @@
     }
 
     @media (max-width: 768px) {
-      /* Logo: mostra solo l'icona coltello, nascondi il testo */
-      .logo { display: flex; align-items: center; font-size: 1.5rem; flex-shrink: 0; }
-      .logo-text { display: none; }
+      /* Logo: mostra icona + nome completo (font ridotto) */
+      .logo { display: flex; align-items: center; font-size: 0.82rem; flex-shrink: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
+      .logo-text { display: inline; }
 
-      /* Icone contatto centrate in assoluto per non sovrapporsi al logo/hamburger */
-      .nav-contact-info {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        gap: 0.9rem;
-      }
-      .nav-contact-item,
-      .nav-social-icon { font-size: 1.1rem; }
+      /* Nascondi icone contatto nella nav: sono già nella sezione Contatti */
+      .nav-contact-info { display: none; }
 
       .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: #1a1a1a; padding: 1.5rem 5%; gap: 1.2rem; }
       .nav-links.open { display: flex; }
@@ -291,14 +289,14 @@
       .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
       .services-grid { grid-template-columns: repeat(2, 1fr); }
 
-      /* Contatti: 1 colonna su mobile per leggere bene email e social */
+      /* Contatti: 1 colonna su mobile, layout orizzontale */
       .contact-cards { grid-template-columns: 1fr; }
       .contact-card { flex-direction: row; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem; text-align: left; }
       .contact-card-icon { font-size: 1.6rem; margin-bottom: 0; flex-shrink: 0; }
       .contact-card svg { width: 28px; height: 28px; }
-      .contact-card-info { display: flex; flex-direction: column; gap: .15rem; overflow: hidden; }
+      .contact-card-info { display: flex; flex-direction: column; gap: .15rem; overflow: hidden; align-items: flex-start; }
       .contact-card strong { font-size: .75rem; }
-      .contact-card span { font-size: .9rem; white-space: normal; word-break: break-all; }
+      .contact-card span { font-size: .9rem; white-space: normal; word-break: break-all; text-align: left; }
 
       .hero { padding: 90px 5% 50px; }
       .hero-btns { flex-direction: column; align-items: center; }
